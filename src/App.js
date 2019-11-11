@@ -3,22 +3,23 @@ import Click from "./components/click";
 import List from "./components/list";
 
 class App extends React.Component {
-  state = {
-    elementId: 1
-  };
+  constructor() {
+    super();
+    this.child = React.createRef();
+  }
 
   handleClick = id => {
     console.log("ID passed", id);
-    this.setState({ elementId: id });
+    this.child.current.getElement(id);
   };
 
   render() {
-    const elementId = this.state.elementId;
+    console.log("App render called");
     return (
       <div className="container">
         <div className="row">
-          <Click elementId={elementId} handleClick={this.handleClick} />
-          <List elementId={elementId} />
+          <Click handleClick={this.handleClick} />
+          <List ref={this.child} />
         </div>
       </div>
     );

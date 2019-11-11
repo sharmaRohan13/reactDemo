@@ -1,11 +1,10 @@
 import React from "react";
-import "../click.css";
 
 class Click extends React.Component {
   constructor() {
     super();
     this.state = {
-      elementId: 1
+      elementId: 0
     };
   }
 
@@ -19,8 +18,11 @@ class Click extends React.Component {
   render() {
     console.log("Click render called");
     return (
-      <div className="Click border" style={{ margin: "50px", padding: "20px" }}>
-        <h3>Last Element Id : {this.props.elementId}</h3>
+      <div
+        className="Click conatiner border"
+        style={{ margin: "50px", padding: "20px" }}
+      >
+        <h3>Last Element Id : {this.state.elementId}</h3>
         <button className="btn btn-lg btn-primary" onClick={this.handleClick}>
           Get Next
         </button>

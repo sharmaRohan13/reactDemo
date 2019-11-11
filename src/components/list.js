@@ -1,31 +1,30 @@
 import React, { Component } from "react";
 
 class List extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       list: []
     };
   }
 
-  componentDidMount() {
-    console.log("List componentDidMount called");
+  getElement = id => {
+    console.log("List getElement called");
     let list = this.state.list;
-    fetch(`https://jsonplaceholder.typicode.com/todos/${this.props.elementId}`)
+    fetch(`https://jsonplaceholder.typicode.com/todos/${id}`)
       .then(res => res.json())
       .then(json => {
         list.push(json.title);
-        console.log(list);
         this.setState({ list });
       });
-  }
+  };
 
   renderElements = list => {
     if (list.length) {
       return (
         <ul>
-          {list.map(ele => (
-            <li key={list.length}>{ele}</li>
+          {list.map((ele, index) => (
+            <li key={index}>{ele}</li>
           ))}
         </ul>
       );
@@ -35,7 +34,10 @@ class List extends Component {
   render() {
     console.log("List render called");
     return (
-      <div className="List border" style={{ margin: "50px", padding: "20px" }}>
+      <div
+        className="List container border"
+        style={{ margin: "50px", padding: "20px" }}
+      >
         <h3>Elememts</h3>
         {this.renderElements(this.state.list)}
       </div>
